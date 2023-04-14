@@ -79,3 +79,18 @@ var swiper = new Swiper(".mySwiper", {
     }
   }
 });
+
+document.addEventListener("mousemove", parallax);
+function parallax(event) {
+  const windowHeight = window.innerHeight;
+  if (event.pageY >= windowHeight) {
+    return;
+  }
+
+  this.querySelectorAll(".parallax").forEach((shift) => {
+    const position = shift.getAttribute("value");
+    const x = (window.innerWidth - event.pageX * position) / 90;
+    const y = (windowHeight - event.pageY * position) / 90;
+    shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  });
+}
